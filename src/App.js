@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { Dashboard } from "./screens/dashboard/Dashboard";
-import JSONData from "./data.json";
+import JSONData from "./assets/data.json";
 
 export const AppContext = React.createContext({
   data: {},
