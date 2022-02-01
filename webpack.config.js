@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: path.join(__dirname, "src", "index.html"),
     }),
   ],
   resolve: {
@@ -27,7 +27,9 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: require.resolve("babel-loader"),
+        use: {
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.css$/,

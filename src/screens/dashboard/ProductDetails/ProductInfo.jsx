@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -11,10 +11,35 @@ import { AppContext } from "../../../App";
 import Disctount from "../../../assets/icons/discount.svg";
 import Add from "../../../assets/icons/add.svg";
 
+function useOnScreen(ref) {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  const observer = new IntersectionObserver(([entry]) =>
+    setIntersecting(entry.isIntersecting)
+  );
+
+  useEffect(() => {
+    observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return isIntersecting;
+}
+
 const ProductInfo = () => {
   let [noOfIems, setNoOfIems] = useState(1);
   const { data, setData } = React.useContext(AppContext);
   let rating = Math.round(data.article.stars);
+
+  const ref = useRef();
+  const isVisible = useOnScreen(ref);
+
+  useEffect(() => {
+    setData({ ...data, isButtonVisible: isVisible });
+  }, [isVisible]);
 
   return (
     <Stack direction="column" justifyContent="space-between" p={0.5}>
@@ -78,6 +103,7 @@ const ProductInfo = () => {
           <span style={{ marginLeft: "5px" }}>PCE</span>
         </Stack>
         <Button
+          ref={ref}
           variant="contained"
           onClick={() => {
             setData({

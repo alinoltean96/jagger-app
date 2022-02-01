@@ -76,7 +76,9 @@ const theme = createTheme({
 });
 
 export const App = () => {
-  const [data, setData] = useState(JSONData);
+  const [data, setData] = useState(
+    Object.assign({ isButtonVisible: false }, JSONData)
+  );
   const value = { data, setData };
 
   return (
