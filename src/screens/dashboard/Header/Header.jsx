@@ -19,6 +19,9 @@ const Header = () => {
 
   useEffect(() => {
     const onScroll = () => setScrollEvent(true);
+    let timeout = setTimeout(() => {
+      setScrollEvent(false);
+    }, 500);
 
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll);

@@ -40,7 +40,7 @@ const ProductInfo = () => {
           sx={{ marginY: 2 }}
         />
 
-        <Stack direction="row" flex alignItems="center" spacing={1}>
+        <Stack direction="row" flex alignItems="center" spacing={1} mt={2}>
           <div style={{ fontWeight: "bold" }}>
             {Intl.NumberFormat("de-DE", {
               style: "currency",
